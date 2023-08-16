@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+https://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <_PublishTargetUrl>C:\inetpub\wwwroot\imx</_PublishTargetUrl>
+    <History>True|2022-03-25T06:02:23.3125327Z;True|2022-03-25T06:43:51.8718518+03:00;True|2022-03-25T06:28:55.1873809+03:00;</History>
+  </PropertyGroup>
+  <ItemGroup>
+    <DestinationConnectionStrings Include="DefaultConnection">
+      <Value>server=.%3bDatabase=DIMSDB%3b Integrated Security=true%3buser=sa%3b password=admin</Value>
+    </DestinationConnectionStrings>
+  </ItemGroup>
+  <ItemGroup>
+    <EFMigrations Include="DIMS.DIMSDataContext.DIMSDbContext">
+      <Value>server=.%3bDatabase=DIMSDB%3b Integrated Security=true%3buser=sa%3b password=admin</Value>
+    </EFMigrations>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,131 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<ApplicationUsers> signInManager
+@{
+    ViewData["Title"] = Localize("Home");
+}
+
+@if (signInManager.IsSignedIn(User))
+{
+    <div class="text-center">
+        <h1 class="display-4">Welcome To @ViewBag.UserLocation</h1>
+    </div>
+    if (User.FindFirst("UserRole").Value == "Public")
+    {
+        <div class="text-center">
+            <h1 class="display-4"> Please wait untile you approved by System Administrator.</h1>
+        </div>
+    }
+    else
+    {
+        <section class="content">
+            <div class="container-fluid">
+                <!-- Info boxes -->
+                <div class="row">
+                    <div class="col-12 col-sm-6 col-md-3">
+                        <div class="info-box">
+                            <span class="info-box-icon bg-info elevation-1"><i class="fa fa-calendar-check"></i></span>
+
+                            <div class="info-box-content">
+                                <span class="info-box-text">New Appointment</span>
+                                <span class="info-box-number">
+                                    4
+                                    <small></small>
+                                </span>
+                            </div>
+                            <!-- /.info-box-content -->
+                        </div>
+                        <!-- /.info-box -->
+                    </div>
+
+
+                    <div class="col-12 col-sm-6 col-md-3">
+                        <div class="info-box">
+                            <span class="info-box-icon bg-info elevation-1"><i class="fa fa-calendar-check"></i></span>
+
+                            <div class="info-box-content">
+                                <span class="info-box-text">Total Appointment</span>
+                                <span class="info-box-number">
+                                    10
+                                    <small></small>
+                                </span>
+                            </div>
+                            <!-- /.info-box-content -->
+                        </div>
+                        <!-- /.info-box -->
+                    </div>
+                    <div class="col-12 col-sm-6 col-md-3">
+                        <div class="info-box">
+                            <span class="info-box-icon bg-info elevation-1"><i class="fa fa-user-injured"></i></span>
+                            <div class="info-box-content">
+                                <span class="info-box-text">New Patient</span>
+                                <span class="info-box-number">
+                                    20
+                                    <small></small>
+                                </span>
+                            </div>
+                            <!-- /.info-box-content -->
+                        </div>
+                        <!-- /.info-box -->
+                    </div>
+
+                    <div class="clearfix hidden-md-up"></div>
+
+                    <div class="col-12 col-sm-6 col-md-3">
+                        <div class="info-box mb-3">
+                            <span class="info-box-icon bg-success elevation-1"><i class="fas fa-user-injured"></i></span>
+
+                            <div class="info-box-content">
+                                <span class="info-box-text">Total Patients</span>
+                                <span class="info-box-number">26</span>
+                            </div>
+                            <!-- /.info-box-content -->
+                        </div>
+                        <!-- /.info-box -->
+                    </div>
+                    <!-- /.col -->
+                    <div class="col-12 col-sm-6 col-md-3">
+                        <div class="info-box mb-3">
+                            <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-user-nurse"></i></span>
+
+                            <div class="info-box-content">
+                                <span class="info-box-text">Doctors</span>
+                                <span class="info-box-number">41</span>
+                            </div>
+                            <!-- /.info-box-content -->
+                        </div>
+                        <!-- /.info-box -->
+                    </div>
+                    <!-- /.col -->
+                    <!-- fix for small devices only -->
+                    <!-- /.col -->
+                    <div class="col-12 col-sm-6 col-md-3">
+                        <div class="info-box mb-3">
+                            <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-users"></i></span>
+
+                            <div class="info-box-content">
+                                <span class="info-box-text">Users</span>
+                                <span class="info-box-number">3</span>
+                            </div>
+                            <!-- /.info-box-content -->
+                        </div>
+                        <!-- /.info-box -->
+                    </div>
+                    <!-- /.col -->
+
+
+                </div>
+            </div>
+        </section>
+    }
+}
+else
+{
+    <div class="text-center">
+        <h1 class="display-4">Not Logged In</h1>
+    </div>
+}
+@*<div class="modal fade" id="UserLoginModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <partial name="_UserLoginPartial" />
+</div>*@
+
+

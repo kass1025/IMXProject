@@ -1,0 +1,190 @@
+﻿@model Enterprise
+@{
+    Layout = "_layout";
+}
+@if (@ViewBag.isSuccess)
+{
+    if (@ViewBag.DuplicateError)
+    {
+        <div class="alert alert-danger fade show alert-dismissible" role="alert">
+            <strong> @ViewBag.DuplicateErrormsg! </strong><br />
+            <button type="button" aria-hidden="true" class="close" data-dismiss="alert" aria-label="close">&times; </button>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-success fade show alert-dismissible" role="alert">
+            <strong>Congratulations</strong>You should add new Enterprise successfully.<br />
+            <button type="button" aria-hidden="true" class="close" data-dismiss="alert" aria-label="close">&times; </button>
+        </div>
+    }
+}
+
+<div>
+    <div class="modal fade" id="modal-md">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-gradient-primary">
+                    <h3 class="modal-title text-center">Add New Enterprise</h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form method="post" asp-action="AddNewEnterprise" asp-controller="Enterprise">
+                        <fieldset>
+                            <div class="form-group float-right col-lg-6">
+                                <select class="form-control select2" asp-for="CapitalSourceId" asp-items="@ViewBag.CapitalSource">
+                                    <option selected="selected" value="">Choose Capital Source</option>
+                                </select>
+                            </div>
+                            <div class="form-group float-left col-lg-6">
+                                <select class="form-control select2" asp-for="GroupTypeId" asp-items="ViewBag.GroupType">
+                                    <option selected="selected" value="">Choose Group Type</option>
+                                </select>
+                            </div>
+                            <div class="form-group float-right col-lg-6">
+                                <select class="form-control select2" asp-for="BranchItemId" asp-items="ViewBag.BranchItem">
+                                    <option selected="selected" value="">Choose Branch Item</option>
+                                </select>
+                            </div>
+                            <div class="form-group float-left col-lg-6">
+                                <select class="form-control select2" asp-for="PromotionLevelId" asp-items="ViewBag.PromotionLevel">
+                                    <option selected="selected" value="">Choose Promotion Level</option>
+                                </select>
+                            </div>
+                            <div class="form-group float-right col-lg-6">
+                                <select class="form-control select2" asp-for="EnterpriseLevelId" asp-items="ViewBag.EnterpriseLevel">
+                                    <option selected="selected" value="">Choose Enterprise Leve</option>
+                                </select>
+                            </div>
+                            <div class="form-group float-left col-lg-6">
+                                <select class="form-control select2" asp-for="EnterpriseStatusId" asp-items="ViewBag.EnterpriseStatus">
+                                    <option selected="selected" value="">Choose Enterprise Status</option>
+                                </select>
+                            </div>
+                            <div class="form-group float-right col-lg-6">
+                                <input asp-for="EnterpriseName" class="form-control" placeholder="Enter Enterprise Name" />
+                            </div>
+                            <div class="form-group float-left col-lg-6">
+                                <input asp-for="TINNumber" class="form-control" placeholder="Enter TIN No." />
+                            </div>
+                            <div class="form-group float-right col-lg-6">
+                                <input asp-for="InitialCapital" class="form-control" placeholder="Enter Initial Capital" />
+                            </div>
+                            <div class="form-group float-left col-lg-6">
+                                <input asp-for="CurrentCapital" class="form-control" placeholder="Enter Current Capital" />
+                            </div>
+                            <div class="form-group">
+                                <input asp-for="FoundedYear" class="form-control" placeholder="Enter Founded Year" />
+                            </div>
+                            <fieldset>
+                                <legend>Founder member by Gender</legend>
+                                <div class="form-group float-right col-lg-6">
+                                    <input asp-for="MaleFouder" class="form-control" placeholder="Enter number of male" />
+                                </div>
+                                <div class="form-group float-left col-lg-6">
+                                    <input asp-for="FemaleFounder" class="form-control" placeholder="Enter number of female" />
+                                </div>
+                            </fieldset>
+                            <fieldset>
+                                <legend>Founder member by Gender and Year(18-34)</legend>
+                                <div class="form-group float-right col-lg-6">
+                                    <input asp-for="MaleFouderYear" class="form-control" placeholder="Enter number of male" />
+                                </div>
+                                <div class="form-group float-left col-lg-6">
+                                    <input asp-for="FemaleFounderYear" class="form-control" placeholder="Enter number of female" />
+                                </div>
+                            </fieldset>
+                            @*<div class="form-group">
+            <input asp-for="Description" class="form-control" placeholder="Enter Region Description" />
+        </div>*@
+                        </fieldset>
+                        <div class="modal-footer justify-content-between">
+                            <button type="button" class="btn btn-lg font-weight-bolder btn-outline-danger" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-lg font-weight-bolder btn-outline-primary"><i class="fas fa-save mr-2"></i>Save</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <button type="button" class="btn btn-lg btn-outline-primary float-right font-weight-bolder" data-toggle="modal" data-target="#modal-md">
+                                <i class="fa fa-plus-square mr-2"></i> Add New
+                            </button>
+                            <h2 class="float-left note-fontsize-10 font-weight-bolder">Enterprise List</h2>
+                        </div>
+
+                        <div class="card-body">
+                            <table id="example2" class="table table-bordered table-hover">
+                                <thead>
+                                    <tr class="bg-gradient-lightblue">
+                                        <th>@Html.DisplayNameFor(model => model.EnterpriseName)</th>
+                                        <th>@Html.DisplayNameFor(model => model.TINNumber)</th>
+                                        <th>@Html.DisplayNameFor(model => model.FoundedYear)</th>
+                                        <th>@Html.DisplayNameFor(model => model.BranchItem.BranchItemName)</th>
+                                        <th>@Html.DisplayNameFor(model => model.EnterpriseLevel.EnterpriseLevelName)</th>
+                                        <th>@Html.DisplayNameFor(model => model.GroupType.GroupTypeName)</th>
+                                        <th>@Html.DisplayNameFor(model => model.CapitalSource.CapitalSourceName)</th>
+                                        <th>@Html.DisplayNameFor(model => model.PromotionLevel.PromotionLeveName)</th>
+                                        <th>@Html.DisplayNameFor(model => model.EnterpriseStatus.EnterpriseStatusName)</th>
+                                        <th>@Html.DisplayNameFor(model => model.InitialCapital)</th>
+                                        <th>@Html.DisplayNameFor(model => model.CurrentCapital)</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in ViewBag.GetAllEnterprise)
+                                    {
+                                        <tr class="info">
+                                            <td>@item.EnterpriseName</td>
+                                            <td>@item.TINNumber</td>
+                                            <td>@item.FoundedYear</td>
+                                            <td>@(item.BranchItem == null?"Not Set": item.BranchItem.BranchItemName)</td>
+                                            <td>@(item.EnterpriseLevel == null?"Not Set": item.EnterpriseLevel.EnterpriseLevelName)</td>
+                                            <td>@(item.GroupType == null?"Not Ser": item.GroupType.GroupTypeName)</td>
+                                            <td>@(item.CapitalSource == null?"Not Set": item.CapitalSource.CapitalSourceName)</td>
+                                            <td>@(item.PromotionLevel == null?"Not Ser": item.PromotionLevel.PromotionLeveName)</td>
+                                            <td>@(item.EnterpriseStatus == null?"Not Ser": item.EnterpriseStatus.EnterpriseStatusName)</td>
+                                            <td>@item.InitialCapital</td>
+                                            <td>@item.CurrentCapital</td>
+                                            <td>
+                                                @*<button type="button" class="btn btn-lg btn-outline-info font-weight-bolder text-lg-center fa fa-edit mr-2" data-toggle="ajax-modal" title="Edit Services" data-target="#EditZonemodal" data-url="@Url.Action($"Edit/{item.Id}")"></button>*@
+                                                <div class="btn-group btn-lg">
+                                                    <button type="button" class="btn btn-info btn-lg">Action</button>
+                                                    <button type="button" class="btn btn-default btn-lg dropdown-toggle dropdown-hover dropdown-icon" data-toggle="dropdown">
+                                                        <span class="sr-only">Toggle Dropdown</span>
+                                                    </button>
+                                                    <div class="dropdown-menu dropdown-menu-lg" role="menu">
+                                                        <a class="dropdown-item nav-link" href="#">Action</a>
+                                                        <a class="dropdown-item nav-link" asp-action="index" asp-controller="EnterpriseAddressInfo" asp-route-id="@item.Id">Enterprise AddressInfo</a>
+                                                        <a class="dropdown-item nav-link" href="#">Details</a>
+                                                        <div class="dropdown-divider"></div>
+                                                    </div>
+                                                </div>
+                                                <a class="btn btn-lg btn-outline-danger font-weight-bolder text-lg-center fa fa-trash-alt" title="Delete Region" asp-action="DeleteRegion" asp-controller="Zone" asp-route-id="@item.Id" onclick="return confirm('Are you sure you want to delete this?')"></a>
+                                                <a class="btn btn-lg btn-outline-danger font-weight-bolder text-lg-center fa fa-trash-alt" title="Delete Region" asp-action="DeleteRegion" asp-controller="Zone" asp-route-id="@item.Id" onclick="return confirm('Are you sure you want to delete this?')"></a>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                                <tfoot>
+                                    <tr class="bg-gradient-navy">
+                                        <td colspan="12"></td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

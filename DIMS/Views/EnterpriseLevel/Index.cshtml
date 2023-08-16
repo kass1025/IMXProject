@@ -1,0 +1,99 @@
+﻿@model EnterpriseLevel
+@{
+    Layout = "_layout";
+}
+@if(@ViewBag.isSuccess)
+{
+    if (@ViewBag.DuplicateError)
+    {
+        <div class="alert alert-danger fade show alert-dismissible" role="alert">
+            <strong> @ViewBag.DuplicateErrormsg! </strong><br />
+            <button type="button" aria-hidden="true" class="close" data-dismiss="alert" aria-label="close">&times; </button>
+        </div>
+    }
+    else
+    {
+<div class="alert alert-success fade show alert-dismissible" role="alert">
+    <strong>Congratulations</strong>You should add new Enterprise Level successfully.<br />
+    <button type="button" aria-hidden="true" class="close" data-dismiss="alert" aria-label="close">&times; </button>
+</div>
+    }
+}
+
+<div>
+    <div class="modal fade" id="modal-md">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-gradient-primary">
+                    <h3 class="modal-title text-center">Add New Enterprise Level</h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form method="post" asp-action="AddNewEnterpriseLevel" asp-controller="EnterpriseLevel">
+                        <fieldset>
+                            <div class="form-group">
+                                <input asp-for="EnterpriseLevelName" class="form-control" placeholder="Enter Enterprise Level Name" />
+                            </div>
+                            <div class="form-group">
+                                <input asp-for="Description" class="form-control" placeholder="Enter Enterprise Level Description" />
+                            </div>
+                        </fieldset>
+                        <div class="modal-footer justify-content-between">
+                            <button type="button" class="btn btn-lg font-weight-bolder btn-outline-danger" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-lg font-weight-bolder btn-outline-primary"><i class="fas fa-save mr-2"></i>Save</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <button type="button" class="btn btn-lg btn-outline-primary float-right font-weight-bolder" data-toggle="modal" data-target="#modal-md">
+                                <i class="fa fa-plus-square mr-2"></i> Add New
+                            </button>
+                            <h2 class="float-left note-fontsize-10 font-weight-bolder">Enterprise Level List</h2>
+                        </div>
+
+                        <div class="card-body">
+                            <table id="example2" class="table table-bordered table-hover">
+                                <thead>
+                                    <tr class="bg-gradient-lightblue">
+                                        <th>@Html.DisplayNameFor(model => model.EnterpriseLevelName)</th>
+                                        <th>@Html.DisplayNameFor(model => model.Description)</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in ViewBag.GetAllEnterpriseLevel)
+                                    {
+                                        <tr class="info">
+                                            <td>@item.EnterpriseLevelName</td>
+                                            <td>@item.Description</td>
+                                            <td>
+                                                <button type="button" class="btn btn-lg btn-outline-info font-weight-bolder text-lg-center fa fa-edit mr-2" data-toggle="ajax-modal" title="Edit Services" data-target="#EditRegionmodal" data-url="@Url.Action($"Edit/{item.Id}")"></button>
+                                                <a class="btn btn-lg btn-outline-danger font-weight-bolder text-lg-center fa fa-trash-alt" title="Delete Region" asp-action="DeleteRegion" asp-controller="Region" asp-route-id="@item.Id" onclick="return confirm('Are you sure you want to delete this?')"></a>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                                <tfoot>
+                                    <tr class="bg-gradient-navy">
+                                        <td colspan="3"></td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

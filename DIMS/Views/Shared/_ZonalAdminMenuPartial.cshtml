@@ -1,0 +1,106 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore
+
+@inject SignInManager<ApplicationUsers> _SignInManager;
+@inject UserManager<ApplicationUsers> _UserManager;
+@if (_SignInManager.IsSignedIn(User) && await _UserManager.IsInRoleAsync(_UserManager.GetUserAsync(User).Result, "ZAdmin"))
+{
+    //Basic Structure
+    <li class="nav-item menu">
+        <a href="#" class="nav-link bg-gradient-lightblue">
+            <i class="nav-icon fas fa-user-friends"></i>
+            <p>
+                BASIC STRUCTURE
+                <i class="right fas fa-angle-left"></i>
+            </p>
+        </a>
+        <ul class="nav nav-treeview">
+            <li class="nav-item">
+                <a asp-controller="Woreda" asp-action="Index" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Woreda</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a asp-controller="City" asp-action="Index" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>City</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a asp-controller="SubCity" asp-action="Index" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Sub City</p>
+                </a>
+            </li>
+
+        </ul>
+    </li>
+    //User Management
+    <li class="nav-item menu-open">
+        <a href="#" class="nav-link bg-gradient-lightblue">
+            <i class="nav-icon fas fa-user-friends"></i>
+            <p>
+                USER MANAGEMENT
+                <i class="right fas fa-angle-left"></i>
+            </p>
+        </a>
+        <ul class="nav nav-treeview">
+            <li class="nav-item">
+                <a asp-action="Signup" asp-controller="Account" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>User Register</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a asp-action="Index" asp-controller="OfficeRegisteration" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Office Registeration</p>
+                </a>
+            </li>
+        </ul>
+    </li>
+    //Basic Profile
+    <li class="nav-item menu-open">
+        <a href="#" class="nav-link bg-gradient-lightblue">
+            <i class="nav-icon fas fa-user-friends"></i>
+            <p>
+                ENTERPRISE PROFILE
+                <i class="right fas fa-angle-left"></i>
+            </p>
+        </a>
+        <ul class="nav nav-treeview">
+            <li class="nav-item">
+                <a asp-action="index" asp-controller="Enterprise" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Enterprise</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a asp-action="index" asp-controller="Member" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Member</p>
+                </a>
+            </li>
+        </ul>
+    </li>
+    //Basic Reports
+    <li class="nav-item menu">
+        <a href="#" class="nav-link bg-gradient-lightblue">
+            <i class="nav-icon fas fa-cog"></i>
+            <p>
+                BASIC REPORTS
+                <i class="right fas fa-angle-left"></i>
+            </p>
+        </a>
+        <ul class="nav nav-treeview">
+
+            <li class="nav-item">
+                <a asp-action="index" asp-controller="Report" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Report</p>
+                </a>
+            </li>
+        </ul>
+    </li>
+}

@@ -1,0 +1,417 @@
+﻿@inject Microsoft.AspNetCore.Identity.UserManager<ApplicationUsers> _signInManager
+@model AccountRegistrationViewModel
+<div>
+    <div class="modal fade" id="modal-md">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-gradient-success">
+                    <h4 class="modal-title text-center"><i class="far fa-edit mr-2"></i>Add New Acount</h4>
+                    <button type="button" class="close btn-outline-danger bg-gradient-red" data-dismiss="modal" aria-label="Close">
+                        <h4> <span aria-hidden="true">&times;</span></h4>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    @if (User.FindFirst("UserRole").Value == "Admin")
+                    {
+                        <form method="post" asp-action="Signup" asp-controller="Account">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            @*<input type="hidden" asp-for="RegistrationInValid" />
+                                <input type="hidden" asp-for="AcceptUserAgreement" />*@
+                            @*@Html.HiddenFor(x => Model.LocationName)*@
+                            <input type="hidden" asp-for="LocationName" value="@ViewBag.userLocation" />
+                            @Html.HiddenFor(x => Model.RegistrationInValid)
+                            @Html.HiddenFor(x => Model.Id)
+                            @Html.HiddenFor(x => Model.LocationCode)
+                            <div class="col-lg-12 float-left">
+                                <fieldset>
+                                    <legend><i class="far fa-user mr-1"></i>Acount Info</legend>
+                                    @*<div class="form-group col-md-4">
+                                        <img src="~/images/signup.png" class="img-fluid img-circle" />        </div>*@
+
+                                    <div class="form-group  float-right col-lg-6">
+                                        <input asp-for="MiddleName" required class="form-control" placeholder="Enter Middle Name" />
+                                    </div>
+                                    <div class="form-group float-left col-lg-6">
+                                        <input asp-for="FirstName" required class="form-control" placeholder="Enter First Name" />
+                                    </div>
+                                    <div class="form-group float-left col-lg-6">
+                                        <input asp-for="Email" type="email" required class="form-control" placeholder="Enter Email" />
+                                    </div>
+
+                                    <div class="form-group float-right col-lg-6">
+                                        <input asp-for="Password" type="password" required class="form-control" placeholder="Enter Password" />
+                                    </div>
+                                    <div class="form-group float-right col-lg-6">
+                                        <input asp-for="ConfirmPassword" type="password" required class="form-control" placeholder="Enter Confirm Password" />
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-md-12">
+                                            <input type="text" asp-for="PhoneNumber" placeholder="Phone Number" class="form-control" data-inputmask='"mask": "(+999) 999-999-999"' data-mask />
+                                            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group float-right col-6">
+                                        <select class="form-control select2" asp-for="LocationId" asp-items="ViewBag.userLocation" style="width: 100%;">
+                                            <option selected="selected" value="">---Choose User Location---</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group float-left col-lg-6">
+                                        <select class="form-control select2" asp-for="RoleName" asp-items="ViewBag.userRoles">
+                                            <option selected="selected" value="">---Choose User Role---</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group float-right col-6">
+                                        <select class="form-control select2" asp-for="ZLocationId" asp-items="ViewBag.Zone" style="width: 100%;">
+                                            <option selected="selected" value="">---Choose Zone---</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group float-left col-lg-6">
+                                        <select class="form-control select2" asp-for="CLocationId" asp-items="ViewBag.City">
+                                            <option selected="selected" value="">---Choose City---</option>
+                                        </select>
+                                    </div>
+                                </fieldset>
+                            </div>
+                            <div class="modal-footer justify-content-between col-md-12">
+                                <button type="button" class="btn btn-lg font-weight-bolder btn-outline-danger" data-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-lg font-weight-bolder btn-outline-primary"><i class="fas fa-save"></i>Save changes</button>
+                            </div>
+                        </form>
+                    }
+                    else if (User.FindFirst("UserRole").Value == "SuperAdmin")
+                    {
+                        <form method="post" asp-action="Signup" asp-controller="Account">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            @*<input type="hidden" asp-for="RegistrationInValid" />
+                                <input type="hidden" asp-for="AcceptUserAgreement" />*@
+                            @*@Html.HiddenFor(x => Model.LocationName)*@
+                            <input type="hidden" asp-for="LocationName" value="@ViewBag.userLocation" />
+                            @Html.HiddenFor(x => Model.RegistrationInValid)
+                            @Html.HiddenFor(x => Model.Id)
+                            @Html.HiddenFor(x => Model.LocationCode)
+                            <div class="col-lg-12 float-left">
+                                <fieldset>
+                                    <legend><i class="far fa-user mr-1"></i>Acount Info</legend>
+                                    @*<div class="form-group col-md-4">
+                                        <img src="~/images/signup.png" class="img-fluid img-circle" />        </div>*@
+
+                                    <div class="form-group  float-right col-lg-6">
+                                        <input asp-for="MiddleName" required class="form-control" placeholder="Enter Middle Name" />
+                                    </div>
+                                    <div class="form-group float-left col-lg-6">
+                                        <input asp-for="FirstName" required class="form-control" placeholder="Enter First Name" />
+                                    </div>
+                                    <div class="form-group float-left col-lg-6">
+                                        <input asp-for="Email" type="email" required class="form-control" placeholder="Enter Email" />
+                                    </div>
+
+                                    <div class="form-group float-right col-lg-6">
+                                        <input asp-for="Password" type="password" required class="form-control" placeholder="Enter Password" />
+                                    </div>
+                                    <div class="form-group float-right col-lg-6">
+                                        <input asp-for="ConfirmPassword" type="password" required class="form-control" placeholder="Enter Confirm Password" />
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-md-12">
+                                            <input type="text" asp-for="PhoneNumber" placeholder="Phone Number" class="form-control" data-inputmask='"mask": "(+999) 999-999-999"' data-mask />
+                                            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group float-right col-6">
+                                        <select class="form-control select2" asp-for="LocationId" asp-items="ViewBag.userLocation" style="width: 100%;">
+                                            <option selected="selected" value="">---Choose User Location---</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group float-left col-lg-6">
+                                        <select class="form-control select2" asp-for="RoleName" asp-items="ViewBag.userRoles">
+                                            <option selected="selected" value="">---Choose User Role---</option>
+                                        </select>
+                                    </div>
+                                </fieldset>
+                            </div>
+                            <div class="modal-footer justify-content-between col-md-12">
+                                <button type="button" class="btn btn-lg font-weight-bolder btn-outline-danger" data-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-lg font-weight-bolder btn-outline-primary"><i class="fas fa-save"></i>Save changes</button>
+                            </div>
+                        </form>
+                    }
+                    else if (User.FindFirst("UserRole").Value == "ZAdmin")
+                    {
+                        <form method="post" asp-action="Signup" asp-controller="Account">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            @*<input type="hidden" asp-for="RegistrationInValid" />
+                                <input type="hidden" asp-for="AcceptUserAgreement" />*@
+                            @*@Html.HiddenFor(x => Model.LocationName)*@
+                            <input type="hidden" asp-for="LocationName" value="@ViewBag.userLocation" />
+                            @Html.HiddenFor(x => Model.RegistrationInValid)
+                            @Html.HiddenFor(x => Model.Id)
+                            @Html.HiddenFor(x => Model.LocationCode)
+                            <div class="col-lg-12 float-left">
+                                <fieldset>
+                                    <legend><i class="far fa-user mr-1"></i>Acount Info</legend>
+                                    @*<div class="form-group col-md-4">
+                                        <img src="~/images/signup.png" class="img-fluid img-circle" />        </div>*@
+
+                                    <div class="form-group  float-right col-lg-6">
+                                        <input asp-for="MiddleName" required class="form-control" placeholder="Enter Middle Name" />
+                                    </div>
+                                    <div class="form-group float-left col-lg-6">
+                                        <input asp-for="FirstName" required class="form-control" placeholder="Enter First Name" />
+                                    </div>
+                                    <div class="form-group float-left col-lg-6">
+                                        <input asp-for="Email" type="email" required class="form-control" placeholder="Enter Email" />
+                                    </div>
+
+                                    <div class="form-group float-right col-lg-6">
+                                        <input asp-for="Password" type="password" required class="form-control" placeholder="Enter Password" />
+                                    </div>
+                                    <div class="form-group float-right col-lg-6">
+                                        <input asp-for="ConfirmPassword" type="password" required class="form-control" placeholder="Enter Confirm Password" />
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-md-12">
+                                            <input type="text" asp-for="PhoneNumber" placeholder="Phone Number" class="form-control" data-inputmask='"mask": "(+999) 999-999-999"' data-mask />
+                                            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group float-right col-6">
+                                        <select class="form-control select2" asp-for="ZLocationId" asp-items="ViewBag.Zone" style="width: 100%;">
+                                            <option selected="selected" value="">---Choose Zone---</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group float-left col-lg-6">
+                                        <select class="form-control select2" asp-for="RoleName" asp-items="ViewBag.userRoles">
+                                            <option selected="selected" value="">---Choose User Role---</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group float-right col-6">
+                                        <select class="form-control select2" asp-for="WLocationId" asp-items="ViewBag.Woreda" style="width: 100%;">
+                                            <option selected="selected" value="">---Choose Woreda---</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group float-left col-lg-6">
+                                        <select class="form-control select2" asp-for="CLocationId" asp-items="@ViewBag.City">
+                                            <option selected="selected" value="">---Choose City---</option>
+                                        </select>
+                                    </div>
+                                </fieldset>
+                            </div>
+                            <div class="modal-footer justify-content-between col-md-12">
+                                <button type="button" class="btn btn-lg font-weight-bolder btn-outline-danger" data-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-lg font-weight-bolder btn-outline-primary"><i class="fas fa-save"></i>Save changes</button>
+                            </div>
+                        </form>
+                    }
+                    else if (User.FindFirst("UserRole").Value == "WAdmin")
+                    {
+                        <form method="post" asp-action="Signup" asp-controller="Account">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            @*<input type="hidden" asp-for="RegistrationInValid" />
+                                <input type="hidden" asp-for="AcceptUserAgreement" />*@
+                            @*@Html.HiddenFor(x => Model.LocationName)*@
+                            <input type="hidden" asp-for="LocationName" value="@ViewBag.userLocation" />
+                            @Html.HiddenFor(x => Model.RegistrationInValid)
+                            @Html.HiddenFor(x => Model.Id)
+                            @Html.HiddenFor(x => Model.LocationCode)
+                            <div class="col-lg-12 float-left">
+                                <fieldset>
+                                    <legend><i class="far fa-user mr-1"></i>Acount Info</legend>
+                                    @*<div class="form-group col-md-4">
+                                        <img src="~/images/signup.png" class="img-fluid img-circle" />        </div>*@
+
+                                    <div class="form-group  float-right col-lg-6">
+                                        <input asp-for="MiddleName" required class="form-control" placeholder="Enter Middle Name" />
+                                    </div>
+                                    <div class="form-group float-left col-lg-6">
+                                        <input asp-for="FirstName" required class="form-control" placeholder="Enter First Name" />
+                                    </div>
+                                    <div class="form-group float-left col-lg-6">
+                                        <input asp-for="Email" type="email" required class="form-control" placeholder="Enter Email" />
+                                    </div>
+
+                                    <div class="form-group float-right col-lg-6">
+                                        <input asp-for="Password" type="password" required class="form-control" placeholder="Enter Password" />
+                                    </div>
+                                    <div class="form-group float-right col-lg-6">
+                                        <input asp-for="ConfirmPassword" type="password" required class="form-control" placeholder="Enter Confirm Password" />
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-md-12">
+                                            <input type="text" asp-for="PhoneNumber" placeholder="Phone Number" class="form-control" data-inputmask='"mask": "(+999) 999-999-999"' data-mask />
+                                            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group float-right col-6">
+                                        <select class="form-control select2" disabled asp-for="LocationId" asp-items="ViewBag.Zone" style="width: 100%;">
+                                            <option selected="selected" value="">---Choose Zone---</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group float-left col-lg-6">
+                                        <select class="form-control select2" asp-for="RoleName" asp-items="ViewBag.userRoles">
+                                            <option selected="selected" value="">---Choose User Role---</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group float-right col-6">
+                                        <select class="form-control select2" asp-for="WLocationId" asp-items="ViewBag.Woreda" style="width: 100%;">
+                                            <option selected="selected" value="">---Choose Woreda---</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group float-left col-lg-6">
+                                        <select class="form-control select2" disabled asp-for="CLocationId" asp-items="ViewBag.City">
+                                            <option selected="selected" value="">---Choose City---</option>
+                                        </select>
+                                    </div>
+                                </fieldset>
+                            </div>
+                            <div class="modal-footer justify-content-between col-md-12">
+                                <button type="button" class="btn btn-lg font-weight-bolder btn-outline-danger" data-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-lg font-weight-bolder btn-outline-primary"><i class="fas fa-save"></i>Save changes</button>
+                            </div>
+                        </form>
+                    }
+                    else if (User.FindFirst("UserRole").Value == "CAdmin")
+                    {
+                        <form method="post" asp-action="Signup" asp-controller="Account">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                            @*<input type="hidden" asp-for="RegistrationInValid" />
+                                <input type="hidden" asp-for="AcceptUserAgreement" />*@
+                            @*@Html.HiddenFor(x => Model.LocationName)*@
+                            <input type="hidden" asp-for="LocationName" value="@ViewBag.userLocation" />
+                            @Html.HiddenFor(x => Model.RegistrationInValid)
+                            @Html.HiddenFor(x => Model.Id)
+                            @Html.HiddenFor(x => Model.LocationCode)
+                            <div class="col-lg-12 float-left">
+                                <fieldset>
+                                    <legend><i class="far fa-user mr-1"></i>Acount Info</legend>
+                                    @*<div class="form-group col-md-4">
+        <img src="~/images/signup.png" class="img-fluid img-circle" />        </div>*@
+
+                                    <div class="form-group  float-right col-lg-6">
+                                        <input asp-for="MiddleName" required class="form-control" placeholder="Enter Middle Name" />
+                                    </div>
+                                    <div class="form-group float-left col-lg-6">
+                                        <input asp-for="FirstName" required class="form-control" placeholder="Enter First Name" />
+                                    </div>
+                                    <div class="form-group float-left col-lg-6">
+                                        <input asp-for="Email" type="email" required class="form-control" placeholder="Enter Email" />
+                                    </div>
+
+                                    <div class="form-group float-right col-lg-6">
+                                        <input asp-for="Password" type="password" required class="form-control" placeholder="Enter Password" />
+                                    </div>
+                                    <div class="form-group float-right col-lg-6">
+                                        <input asp-for="ConfirmPassword" type="password" required class="form-control" placeholder="Enter Confirm Password" />
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-md-12">
+                                            <input type="text" asp-for="PhoneNumber" placeholder="Phone Number" class="form-control" data-inputmask='"mask": "(+999) 999-999-999"' data-mask />
+                                            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group float-right col-6">
+                                        <select class="form-control select2" disabled asp-for="LocationId" asp-items="ViewBag.Zone" style="width: 100%;">
+                                            <option selected="selected" value="">---Choose Zone---</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group float-left col-lg-6">
+                                        <select class="form-control select2" asp-for="RoleName" asp-items="ViewBag.userRoles">
+                                            <option selected="selected" value="">---Choose User Role---</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group float-right col-6">
+                                        <select class="form-control select2" disabled asp-for="ZLocationId" asp-items="ViewBag.Woreda" style="width: 100%;">
+                                            <option selected="selected" value="">---Choose Woreda---</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group float-right col-6">
+                                        <select class="form-control select2" asp-for="CLocationId" asp-items="ViewBag.City" style="width: 100%;">
+                                            <option selected="selected" value="">---Choose City---</option>
+                                        </select>
+                                    </div>
+                                </fieldset>
+                            </div>
+                            <div class="modal-footer justify-content-between col-md-12">
+                                <button type="button" class="btn btn-lg font-weight-bolder btn-outline-danger" data-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-lg font-weight-bolder btn-outline-primary"><i class="fas fa-save"></i>Save changes</button>
+                            </div>
+                        </form>
+                    }
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+        <!-- /.modal -->
+        @*@if (@ViewBag.isSuccess)
+            {
+                <div class="alert alert-success fade show alert-dismissible" role="alert">
+                    <strong>Congratulations</strong>You should add new Account successfully.<br />
+                    Click here to view details
+                    <button type="button" aria-hidden="true" class="close" data-dismiss="alert" aria-label="close">&times; </button>
+                </div>
+            }*@
+
+    </div>
+
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <button type="button" class="btn btn-lg btn-outline-primary float-right font-weight-bolder text-left" data-toggle="modal" data-target="#modal-md">
+                                <i class="fa fa-plus-circle mr-2"></i> Add New
+                            </button>
+                            <h2 class="float-left note-fontsize-10 font-weight-bolder">Account List</h2>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            <table id="example2" class="table table-bordered table-hover">
+                                <thead>
+                                    <tr class="bg-gradient-lightblue text-lg">
+                                        <th>ID</th>
+                                        <th>Full Name </th>  >
+                                        <th>User Name</th>
+                                        <th>Role Name</th>
+                                        <th>User Lacation</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in @ViewBag.users)
+                                    {
+                                        <tr class="info font-weight-bold text-lg">
+                                            <td>@item.Id</td>
+                                            <td>@(item.FirstName +" "+ item.MiddleName)</td>
+                                            <td>@item.UserName</td>
+                                            <td>@item.RoleName</td>
+                                            <td>@item.LocationName</td>
+                                            <td class="bg-gradient-white">
+                                                <a class="btn btn-lg btn-outline-danger  font-weight-bolder text-lg-center fa fa-trash-alt" title="DELETE" asp-controller="Account" asp-action="RemoveAccountFromList" asp-route-id="@item.Id" onclick="return confirm('Are you sure you want to delete this?')"></a>
+                                                @*<a class="btn btn-outline-primary  font-weight-bolder text-left fa fa-edit" title="DELETE" href="#"></a>*@
+                                            </td>
+
+
+                                        </tr>
+
+                                    }
+                                </tbody>
+                                <tfoot>
+                                    <tr class="info">
+                                        <th>ID</th>
+                                        <th>Full Name </th>
+                                        <th>Gender</th>
+                                        <th>Room Number</th>
+                                        <th>E-mail</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+

@@ -1,0 +1,120 @@
+﻿@model UserRoles
+
+<div>
+    <div class="modal fade" id="modal-md">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header bg-gradient-success">
+                    <h4 class="modal-title text-center"><i class="far fa-edit mr-2"></i>Add User Role</h4>
+                    <button type="button" class="close btn-outline-danger bg-gradient-red" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true"><h4>&times;</h4></span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form method="post" asp-action="CreateRole" asp-controller="UserRole">
+                        <div class="col-md-12 float-left">
+                            <fieldset>
+                                <legend><i class="far fa-file-alt mr-1"></i>User Role Info</legend>
+                                <div class="form-group">
+                                    <input asp-for="RoleName" required class="form-control" placeholder="Enter Role Name" />
+                                </div>
+                                <div class="form-group ">
+                                    <textarea asp-for="Description" class="form-control" rows="4" placeholder="Enter User Role Description"></textarea>
+                                </div>
+                            </fieldset>
+                        </div>
+                        @*<div class="col-md-6 float-right">
+                            <img src="~/images/signup.png" class="img-fluid" />
+                        </div>*@
+                        <div class="modal-footer justify-content-between col-md-12">
+                            <button type="button" class="btn btn-lg font-weight-bolder btn-outline-danger" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-lg font-weight-bolder btn-outline-primary"><i class="fas fa-save mr-2"></i>Save</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+        <!-- /.modal -->
+        @*@if (@ViewBag.isSuccess)
+            {
+                <div class="alert alert-success fade show alert-dismissible" role="alert">
+                    <strong>Congratulations</strong>You should add new Account successfully.<br />
+                    Click here to view details
+                    <button type="button" aria-hidden="true" class="close" data-dismiss="alert" aria-label="close">&times; </button>
+                </div>
+            }*@
+
+    </div>
+
+
+    
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <button type="button" class="btn btn-outline-primary float-right font-weight-bolder text-left" data-toggle="modal" data-target="#modal-md">
+                                <i class="fa fa-plus-circle mr-2"></i> Add New
+                            </button>
+                            <h2 class="float-left note-fontsize-10 font-weight-bolder">Account List</h2>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            <table id="example2" class="table table-bordered table-hover">
+                                <thead>
+                                    <tr class="bg-gradient-lightblue">
+                                        <th>@Html.DisplayNameFor(model => model.RoleName)</th>
+                                        <th>@Html.DisplayNameFor(model => model.RoleName)</th>
+                                        <th>@Html.DisplayNameFor(model => model.RoleName)</th>
+                                        @*<th>@Html.DisplayNameFor(model => model.Password)</th>*@
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in @ViewBag.userRoles)
+                                    {
+                                    <tr class="info">
+                                        <td>@item.Name</td>
+                                        <td>@item.NormalizedName</td>
+                                        <td>@item.ConcurrencyStamp</td>
+                                        <td>
+                                            <div class="btn-group">
+                                                <button type="button" class="btn btn-info">Action</button>
+                                                <button type="button" class="btn btn-default dropdown-toggle dropdown-hover dropdown-icon" data-toggle="dropdown">
+                                                    <span class="sr-only">Toggle Dropdown</span>
+                                                </button>
+                                                <div class="dropdown-menu" role="menu">
+                                                    <a class="dropdown-item active" href="#">Group 1</a>
+                                                    <a class="btn btn-outline-info form-control font-weight-bolder text-left" data-toggle="modal" data-target="#modal-UR">Add User Role</a>
+                                                    <a class="btn btn-outline-info form-control font-weight-bolder text-left" asp-controller="Patient" asp-action="PatientVitalDetail" asp-route-id="@item.Id">Edit</a>
+                                                    <a class="btn btn-outline-info form-control font-weight-bolder text-left" asp-controller="Patient" asp-action="PatientVitalDetail" asp-route-id="@item.Id">Deactive</a>
+                                                    <a class="btn btn-outline-info form-control font-weight-bolder text-left" asp-controller="Patient" asp-action="PatientVitalDetail" asp-route-id="@item.Id">Details</a>
+                                                </div>
+                                            </div>
+                                        </td>
+
+                                    </tr>
+
+                                    }
+                                </tbody>
+                                <tfoot>
+                                    <tr class="info">
+                                        <th>@Html.DisplayNameFor(model => model.RoleName)</th>
+                                        <th>@Html.DisplayNameFor(model => model.RoleName)</th>
+                                        <th>@Html.DisplayNameFor(model => model.RoleName)</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+   
+ 

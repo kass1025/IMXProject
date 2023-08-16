@@ -1,0 +1,52 @@
+﻿@inject Microsoft.AspNetCore.Identity.SignInManager<ApplicationUsers> _signInManager
+@inject Microsoft.AspNetCore.Identity.SignInManager<ApplicationUsers> _signInManager
+@if (_signInManager.IsSignedIn(User))
+{
+
+    <div class="navbar-custom-menu">
+        <ul class="nav navbar-nav">
+            <!-- User Account: style can be found in dropdown.less -->
+            <li class="dropdown user user-menu">
+
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+
+                    @*@if (ViewBag.userPhoto != null)
+                        {
+                            <img src="~/UserPhoto/@ViewBag.userPhoto.PhotoName" class="user-image" alt="User Image">
+                        }*@
+
+                    <span class="hidden-xs"><b>Welcome </b> @User.Identity.Name</span>
+                </a>
+                <ul class="dropdown-menu">
+                    <!-- User image -->
+                    <li class="user-header">
+                        @*if*if (ViewBag.userPhoto != null)
+                            //{
+
+                               // <img src="~/UserPhoto/@ViewBag.userPhoto.PhotoName" class="img-circle" alt="User Image">
+
+                            //}*@
+                        <img src="~/images/logo2.png" />
+
+
+                        <p>@(User.FindFirst("UserFirstName").Value+" "+User.FindFirst("UserMiddleName").Value)</p>
+                    </li>
+
+                    <!-- Menu Footer-->
+                    <li class="user-footer">
+
+                        <div>
+                            <a asp-controller="Account" asp-action="UserProfile" class="btn btn-primary btn-flat form-control">Profile</a>
+                        </div>
+
+                        <div>
+                            <a asp-controller="Account" asp-action="logout" class="btn  btn-outline-success btn-flat form-control">Sign out</a>
+
+                        </div>
+
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+}

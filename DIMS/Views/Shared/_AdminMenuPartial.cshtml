@@ -1,0 +1,216 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using Microsoft.AspNetCore
+
+@inject SignInManager<ApplicationUsers> _SignInManager;
+@inject UserManager<ApplicationUsers> _UserManager;
+
+@if (_SignInManager.IsSignedIn(User) && await _UserManager.IsInRoleAsync(_UserManager.GetUserAsync(User).Result, "Admin"))
+{
+    
+    //Basic Structure
+    <li class="nav-item menu">
+        <a href="#" class="nav-link bg-gradient-lightblue">
+            <i class="nav-icon fas fa-user-friends"></i>
+            <p>
+                BASIC STRUCTURE
+                <i class="right fas fa-angle-left"></i>
+            </p>
+        </a>
+        <ul class="nav nav-treeview">
+            <li class="nav-item">
+                <a asp-action="Inde" asp-controller="County" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>County</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a asp-controller="Region" asp-action="Index" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Region</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a asp-controller="Zone" asp-action="Index" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Zone</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a asp-controller="Woreda" asp-action="Index" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Woreda</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a asp-controller="City" asp-action="Index" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>City</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a asp-controller="SubCity" asp-action="Index" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Sub City</p>
+                </a>
+            </li>
+
+        </ul>
+    </li>
+    //User Management
+    <li class="nav-item menu-open">
+        <a href="#" class="nav-link bg-gradient-lightblue">
+            <i class="nav-icon fas fa-user-friends"></i>
+            <p>
+                USER MANAGEMENT
+                <i class="right fas fa-angle-left"></i>
+            </p>
+        </a>
+        <ul class="nav nav-treeview">
+            <li class="nav-item">
+                <a asp-action="Signup" asp-controller="Account" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>User Register</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a asp-action="Index" asp-controller="OfficeRegisteration" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Office Registeration</p>
+                </a>
+            </li>
+        </ul>
+    </li>
+    //Basic Setting
+    <li class="nav-item menu">
+        <a href="#" class="nav-link bg-gradient-lightblue">
+            <i class="nav-icon fas fa-cog"></i>
+            <p>
+                BASIC SETTINGS
+                <i class="right fas fa-angle-left"></i>
+            </p>
+        </a>
+        <ul class="nav nav-treeview">
+            <li class="nav-item">
+                <a asp-action="index" asp-controller="Gender" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Gender</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a asp-action="index" asp-controller="Title" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Title</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a asp-action="index" asp-controller="Disability" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Disability</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a asp-action="index" asp-controller="EducationType" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Education Type</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a asp-action="index" asp-controller="EducationLevel" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Education Level</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a asp-action="index" asp-controller="EnterpriseLevel" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Enterprise Level</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a asp-action="index" asp-controller="EnterpriseStatus" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Enterprise Status</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a asp-action="index" asp-controller="GroupType" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Group Type</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a asp-action="index" asp-controller="MemberType" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Member Type</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a asp-action="index" asp-controller="PromotionLevel" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Promotion Level</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a asp-action="index" asp-controller="Branch" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Branch</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a asp-action="index" asp-controller="BranchItem" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Branch Item</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a asp-action="index" asp-controller="CapitalSource" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Capital Source</p>
+                </a>
+            </li>
+        </ul>
+    </li>
+    //Basic Profile
+    <li class="nav-item menu-open">
+        <a href="#" class="nav-link bg-gradient-lightblue">
+            <i class="nav-icon fas fa-user-friends"></i>
+            <p>
+                ENTERPRISE PROFILE
+                <i class="right fas fa-angle-left"></i>
+            </p>
+        </a>
+        <ul class="nav nav-treeview">
+            <li class="nav-item">
+                <a asp-action="index" asp-controller="Enterprise" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Enterprise</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a asp-action="index" asp-controller="Member" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Member</p>
+                </a>
+            </li>
+        </ul>
+    </li>
+    //Basic Reports
+    <li class="nav-item menu">
+        <a href="#" class="nav-link bg-gradient-lightblue">
+            <i class="nav-icon fas fa-cog"></i>
+            <p>
+                BASIC REPORTS
+                <i class="right fas fa-angle-left"></i>
+            </p>
+        </a>
+        <ul class="nav nav-treeview">
+
+            <li class="nav-item">
+                <a asp-action="index" asp-controller="Report" class="nav-link">
+                    <i class="far fa-circle nav-icon"></i>
+                    <p>Report</p>
+                </a>
+            </li>
+        </ul>
+    </li>
+}
